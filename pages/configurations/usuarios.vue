@@ -47,11 +47,12 @@ const { data: userData, pending, error, refresh } = await useAsyncData<UsuarioLi
 })
 
 /**
- * Computed que retorna la lista de usuarios si exito = true, o un array vacío en caso contrario.
+ * Computed que retorna la lista de usuarios ordenada de forma ascendente por id, 
+ * si exito = true, o un array vacío en caso contrario.
  */
 const users = computed<any[]>(() => {
   if (!userData.value?.exito) return []
-  return userData.value.datos
+  return [...userData.value.datos].sort((a, b) => a.id - b.id)
 })
 
 /**
